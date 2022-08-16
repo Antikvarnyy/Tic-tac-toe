@@ -1,6 +1,8 @@
 ﻿#include <iostream>
 #include <conio.h>
 #include <String>
+#include <chrono>
+#include <thread>
 using namespace std;
 
 bool CheckingNumbers(const string& s) {
@@ -669,11 +671,11 @@ int main()
 	char ch;
 	int b = 0;
 	do {
-		cout << "1 - Player vs PC(random fill)\n2 - Player vs Player\n";
+		cout << "1 - Player vs PC(random fill)\n2 - Player vs Player\n3 - PC vc PC(for fun)\n";
 		ch = _getch();
 		if (ch == 27)
 			return 0;
-	} while (ch != '1' && ch != '2');
+	} while (ch != '1' && ch != '2'&&ch!='3');
 	if (ch == '1') {
 		for (int i = 1; true; i++) {
 			system("cls");
@@ -697,7 +699,7 @@ int main()
 			}
 		}
 	}
-	else{
+	else if(ch=='2') {
 		for (int i = 1; true; i++) {
 			system("cls");
 			if (t.Check()) {
@@ -711,6 +713,36 @@ int main()
 			}
 			else {
 				t.O();
+			}
+		}
+	}
+	else {
+		for (int i = 1; true; i++) {
+			system("cls");
+			if (t.Check()) {
+				t.Print();
+				break;
+			}
+			t.Print();
+			this_thread::sleep_for(1500ms);
+			cout << "\n";
+			if (i % 2 != 0) {
+				while (true) {
+					b = 1 + rand() % 9;
+					if (t.cell[b - 1] == 0) {
+						t.cell[b - 1] = 1;
+						break;
+					}
+				}
+			}
+			else {
+				while (true) {
+					b = 1 + rand() % 9;
+					if (t.cell[b - 1] == 0) {
+						t.cell[b - 1] = 2;
+						break;
+					}
+				}
 			}
 		}
 	}
